@@ -66,7 +66,7 @@ sudo fc-cache -fv
 ```
 之后我们打开AndroidStudio,把Show only momospaced fonts的勾选取消，就可以找到刚刚添加的字体了。
 ![](http://upload-images.jianshu.io/upload_images/6524321-d427f9d8d653c7ed.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-###科学上网
+### 科学上网
 linux下并没有有图形界面的ssr客户端，但是有一款ss客户端是有图形化界面的。这款软件需要我们搭配一款名为	SwitchyOmega的Chrome插件来使用。
 ```
 sudo add-apt-repository ppa:hzwhuang/ss-qt5
