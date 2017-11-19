@@ -11,17 +11,17 @@ tags:
     - Linux
 ---
 
-##java环境的配置
+### java环境的配置
 本文默认读者已安装好java环境，如果没有请按照下面的链接里的步骤来配置。
 http://www.yiibai.com/java/how-to-install-java-on-ubuntu.html
-##安装AndroidStudio
-###通过命令行自动安装
+## 安装AndroidStudio
+### 通过命令行自动安装
 在终端输入```sudo apt-get install android-studio```然后输入密码就会自动帮你安装android并帮你配置好所有的环境变量，而且还会把androidstudio自动加入到启动器中，可以说是不能再方便，但是这样做有几点坏处:
 + 下载速度很慢，只有几百k 
 + 如下图所示，除了必要的AndroidStudio，还会为我们自动安装openjdk等许多不必要的东西。
 ![](http://upload-images.jianshu.io/upload_images/6524321-639e97bf084b5d4f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 + 在写本文的时候，AndroidStudio已经更新到3.0版本，而通过终端下载的版本还是2.3.3，安装之后需要自己再手动更新到3.0，比较麻烦
-###手动安装
+### 手动安装
 + 到[官方网站](https://developer.android.google.cn/studio/index.html)下载AndroidStudio for linux的安装包。
 + 如果你运行的是64位的系统，你需要在终端里输入```sudo apt-get install lib32z1 lib32ncurses5 lib32stdc++6```来安装32位的兼容库。
 + 把下载的压缩包解压到你想要的位置。
