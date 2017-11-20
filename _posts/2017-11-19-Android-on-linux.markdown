@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Linux下Android开发环境的搭建"
-subtitle:   ""
+subtitle:   "本文章独家授权公众号码个蛋原创推文"
 date:       2017-11-19 12:00:00
 author:     "Max"
 header-img: "img/post-bg-2015.jpg"
