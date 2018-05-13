@@ -1,0 +1,140 @@
+---
+layout:     post
+title:      "Builder模式"
+subtitle:   ""
+date:       2018-05-13 18:03:00
+author:     "Max"
+header-img: "img/post-bg-2015.jpg"
+catalog: true
+tags:
+    - 设计模式
+---
+
+### 什么是Builder模式
+
+相信很多Android开发者都使用过形如下面的代码创建过dialog。
+
+```java
+AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+builder.setTitle("Title")
+       .setMessage("message")
+       .setCancelable(true);
+AlertDialog dialog = builder.create();
+```
+
+可以看到一个dialog对象并不是通过new关键字传参来直接创建，而是通过一个中间变量builder来实现，通过不断的对builder设置参数，最后通过builder的一个方法来完成对对象的创建。这就是所谓的builder模式。
+
+### Builder模式的实现思路
+
+因为不能通过new来创建，所以构造函数肯定是私有的，而builder类又要调用构造函数，所以builder类一定是要创建的主类的内部类。除此之外，由于是builder对象返回的主类对象，所以builder对象肯定持有一个主类的实例对象。之后便是各种set方法来对这个对象赋值，最后通过一个公共的方法返回该对象。
+
+### 单例的实现方式
+
+```java
+public class Product {
+    private String attribute1;
+    private String attribute2;
+    private String attribute3;
+
+    private Product() {
+
+    }
+
+    @Override
+    public String toString() {
+        return attribute1 + " " + attribute2 + " " + attribute3;
+    }
+
+    public static class Builder {
+        private Product product = new Product();
+        public void setAttribute1(String attribute1) {
+            product.attribute1 = attribute1;
+        }
+
+        public void setAttribute2(String attribute2) {
+            product.attribute2 = attribute2;
+        }
+
+        public void setAttribute3(String attribute3) {
+            product.attribute3 = attribute3;
+        }
+
+        public Product build() {
+            return product;
+        }
+    }
+}
+```
+
+我们基本上按照上述思路实现了该代码，为了一会调试方便我加了一个toString方法。
+
+可以看到我在这创建了一个product类，这个类有三个属性，可以是任意类型，为了方便我都给设置成了string。之后通过内部类builder的三个set方法去设置这三个值，通过create方法返回product对象。
+
+在主类中写如下测试代码，可以看到如图的运行结果。
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        Product.Builder builder = new Product.Builder();
+        builder.setAttribute1("属性1");
+        builder.setAttribute2("属性2");
+        builder.setAttribute3("属性3");
+        Product product = builder.build();
+        System.out.println(product.toString());
+    }
+}
+```
+
+![](https://upload-images.jianshu.io/upload_images/6524321-72a64a9ee40b9be9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+但是这段代码比较繁琐，并没有实现像最开始介绍时创建dialog时那么方便，我们可以通过对代码进行修改来改正这个不方便的地方。
+
+修改builder类的代码，令它的3个set方法都在赋值后返回它自身，这样就完成了。
+
+```java
+	public static class Builder {
+        private Product product = new Product();
+        public Builder setAttribute1(String attribute1) {
+            product.attribute1 = attribute1;
+            return this;
+        }
+
+        public Builder setAttribute2(String attribute2) {
+            product.attribute2 = attribute2;
+            return this;
+        }
+
+        public Builder setAttribute3(String attribute3) {
+            product.attribute3 = attribute3;
+            return this;
+        }
+
+        public Product build() {
+            return product;
+        }
+    }
+```
+
+主类测试运行结果和上面一样，就不贴图了。
+
+```java
+        Product.Builder builder = new Product.Builder();
+        Product product = builder.setAttribute1("属性1")
+                .setAttribute2("属性2")
+                .setAttribute3("属性3")
+                .build();
+        System.out.println(product.toString());
+```
+
+
+
+### Builder模式的优缺点
+
+#### 优点
+
+- 良好的封装性（调用者不必知道主类的实现细节，只需要对自己关心的值进行设置）
+- 容易扩展（增加属性只需要对builder增加一个对应的方法即可）
+
+#### 缺点
+
+- 作为中间值产生的builder对象会消耗不必要的内存
