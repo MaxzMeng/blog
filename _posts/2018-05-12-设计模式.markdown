@@ -16,8 +16,8 @@ tags:
 
 ### 目录
 
-- [单例模式](http://maxandroid.me/2017/05/12/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/)
-- [Builder模式]((http://maxandroid.me/2017/05/13/Builder模式/))
+- [单例模式](http://maxandroid.me/2018/05/12/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/)
+- [Builder模式](http://maxandroid.me/2018/05/13/Builder%E6%A8%A1%E5%BC%8F/)
 - 原型模式
 - 工厂模式
 - 抽象工厂模式
